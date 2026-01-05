@@ -118,6 +118,20 @@ class Board:
 
         return max(dfs(node, set()) for node in graph)
 
+    def produce_resources(self, dice_value: int) -> List[ResourceType]:
+        produced_resources: List[ResourceType] = []
+
+        for tile in self.tiles:
+            if tile.number == dice_value:
+                for corner in tile.corners(self.size):
+                    key = normalize(corner)
+                    node = self.nodes.get(key)
+
+                    if node and node.owner is not None:
+                        produced_resources.append(tile.resource)
+
+        return produced_resources
+
     def debug_summary(self) -> dict:
         return {
             "tiles": len(self.tiles),

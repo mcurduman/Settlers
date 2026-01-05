@@ -1,13 +1,12 @@
+from typing import Tuple
 from app.game.game import Game
 from app.game.board import Board
 from app.game.players.player import Player
-from app.game.states.setup_state import SetupState
-from app.game.states.playing_state import PlayingState
-
 from app.game.commands.roll_dice import RollDiceCommand
+from app.game.commands.place_road import PlaceRoadCommand
 from app.game.commands.trade_with_bank import TradeWithBankCommand
 from app.game.commands.place_settlement import PlaceSettlementCommand
-
+from app.utils.exceptions.state_not_found_exception import StateNotFoundException
 from app.game.entities.resource_type import ResourceType
 
 
@@ -31,20 +30,35 @@ class GameService:
         board = Board()
         self.game = Game(players=[human, ai], board=board)
 
-        # Initial state
-        self.game.set_state(SetupState())
-
         return self.get_state()
+
+    def end_game(self):
+        """
+        Ends the current game.
+        """
+        self.game = None
+        return {"message": "Game ended successfully."}
+
+    def end_turn(self):
+        """
+        Ends the current player's turn.
+        """
+        self._ensure_game_started()
+
+        next_player = self.game.next_player()
+
+        return self.get_state(extra={"current_player": next_player.name})
 
     # Commands
     def roll_dice(self):
         self._ensure_game_started()
 
         command = RollDiceCommand()
-        player = self._human_player()
-
+        player = self.game.current_player()
         result = self.game.execute_command(command, player)
-        return self.get_state(extra={"dice": result})
+        return self.get_state(
+            extra={"current_player": player.name, "dice_value": result}
+        )
 
     def trade_with_bank(self, give: str, receive: str):
         self._ensure_game_started()
@@ -59,12 +73,17 @@ class GameService:
 
         return self.get_state()
 
-    def place_settlement(self, position: int):
+    def place_settlement(self, position: Tuple[float, float]):
         self._ensure_game_started()
 
         command = PlaceSettlementCommand(position=position)
-        player = self._human_player()
+        player = self.game.current_player()
+        self.game.execute_command(command, player)
+        return self.get_state()
 
+    def place_road(self, a: tuple, b: tuple):
+        command = PlaceRoadCommand(a, b)
+        player = self._human_player()
         self.game.execute_command(command, player)
         return self.get_state()
 
@@ -73,6 +92,8 @@ class GameService:
         """
         Returns a serializable snapshot of the game.
         """
+        if self.game is None:
+            raise StateNotFoundException("Game has not been started")
         state = {
             "state": self.game.state.__class__.__name__,
             "board": [tile.model_dump() for tile in self.game.board.tiles],
