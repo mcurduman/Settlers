@@ -1,0 +1,8 @@
+from engine.utils.exceptions.base_app_exception import BaseAppException
+
+
+class RoadException(BaseAppException):
+    """Raised when there is an error related to road placement or management"""
+
+    def __init__(self, message: str):
+        super().__init__(message, status_code=400)
