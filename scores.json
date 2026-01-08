@@ -1,0 +1,860 @@
+[
+  {
+    "date": "2026-01-07 18:56:56",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-07 18:56:58",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-07 18:57:02",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-07 18:57:04",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-07 18:57:07",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-07 18:57:09",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-07 18:57:12",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-07 18:57:15",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 02:24:22",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 02:32:09",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 02:54:42",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 03:01:15",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 03:26:15",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 03:27:33",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 03:51:36",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 09:46:29",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 11:12:02",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 11:16:37",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 11:39:25",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 11:39:41",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 11:42:33",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 11:45:39",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 11:46:21",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 11:46:55",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 11:48:56",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:05:26",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:43:20",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:43:25",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:43:29",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:43:33",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:43:37",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:43:42",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:43:46",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:43:51",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:43:55",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:43:59",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:44:02",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:44:08",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:44:28",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:44:33",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:44:37",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:44:41",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:44:45",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:44:49",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 12:44:52",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 13:37:45",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 13:46:16",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 13:46:32",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 13:49:07",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 14:08:09",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 2
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 14:41:13",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 14:46:40",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 15:24:27",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 5
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 15:36:08",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 15:53:28",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 2
+      },
+      {
+        "name": "AI",
+        "victory_points": 2
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 16:05:16",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 16:15:13",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 16:16:05",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 16:16:07",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 16:19:29",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 0
+      },
+      {
+        "name": "AI",
+        "victory_points": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 16:22:10",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 16:22:28",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 16:44:53",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 16:45:11",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 1
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 16:51:56",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 2
+      },
+      {
+        "name": "AI",
+        "victory_points": 2
+      }
+    ]
+  },
+  {
+    "date": "2026-01-08 16:55:35",
+    "players": [
+      {
+        "name": "Human",
+        "victory_points": 3
+      },
+      {
+        "name": "AI",
+        "victory_points": 1
+      }
+    ]
+  }
+]
