@@ -1,4 +1,8 @@
 def point_near_segment(p, a, b, tolerance):
+    """
+    Check if point p is within a certain distance (tolerance) of the segment ab.
+    Useful for detecting clicks near a road/edge.
+    """
     px, py = p
     ax, ay = a
     bx, by = b
@@ -31,6 +35,10 @@ def point_near_segment(p, a, b, tolerance):
 
 
 def edge_connected_to_player(edge, board, player_id):
+    """
+    Returns True if the edge is connected to any settlement or road owned by the player.
+    Used to check if a new road can be placed.
+    """
     # noduri conectate de edge
     a, b = edge["a"], edge["b"]
 
@@ -51,6 +59,10 @@ def edge_connected_to_player(edge, board, player_id):
 
 
 def has_resources(resources, cost: dict) -> bool:
+    """
+    Returns True if the player has at least the required amount of each resource in cost.
+    Used for build/trade validation.
+    """
     for res, amt in cost.items():
         if resources.get(res, 0) < amt:
             return False
@@ -58,6 +70,10 @@ def has_resources(resources, cost: dict) -> bool:
 
 
 def edge_connected_to_network(edge, board, player_id):
+    """
+    Returns True if the edge is connected to the player's road network or settlements.
+    Used to validate road placement in the main phase.
+    """
     a, b = edge["a"], edge["b"]
 
     # settlement
@@ -79,12 +95,30 @@ def edge_connected_to_network(edge, board, player_id):
 
 
 def is_valid_settlement_node(board, node, player_id):
+    """
+    Returns True if the node is a valid settlement spot for the player:
+    - Node is empty
+    - Distance rule is satisfied (no adjacent settlements)
+    - Connected to player's road network
+    """
     if node["owner"] is not None:
         return False
 
     pos = node["position"]
 
-    # distance rule
+    if not _distance_rule_ok(board, pos):
+        return False
+
+    if _connected_to_players_road(board, pos, player_id):
+        return True
+
+    return False
+
+
+def _distance_rule_ok(board, pos):
+    """
+    Returns True if there are no settlements adjacent to pos (distance rule satisfied).
+    """
     for edge in board["edges"]:
         other = None
         if edge["a"] == pos:
@@ -95,16 +129,24 @@ def is_valid_settlement_node(board, node, player_id):
             for n in board["nodes"]:
                 if n["position"] == other and n["owner"] is not None:
                     return False
+    return True
 
-    # connected to player's road
+
+def _connected_to_players_road(board, pos, player_id):
+    """
+    Returns True if pos is connected to any road owned by the player.
+    Used for settlement placement validation.
+    """
     for edge in board["edges"]:
         if str(edge["owner"]).lower() == str(player_id).lower() and (
             edge["a"] == pos or edge["b"] == pos
         ):
             return True
-
     return False
 
 
 def can_trade_3_1(resources: dict) -> bool:
+    """
+    Returns True if the player can trade 3 of any resource for 1 (bank trade).
+    """
     return any(v >= 3 for v in resources.values())

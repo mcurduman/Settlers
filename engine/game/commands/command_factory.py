@@ -19,9 +19,6 @@ from engine.game.entities.resource_type import ResourceType
 class CommandFactory:
     @staticmethod
     def create(command_name, **kwargs):
-        from engine.game.commands.start_game import StartGameCommand
-        from engine.game.commands.end_game import EndGameCommand
-        from engine.game.commands.get_state import GetStateCommand
 
         mapping = {
             "roll_dice": lambda: RollDiceCommand(),
@@ -39,9 +36,6 @@ class CommandFactory:
             "exit_place_settlement": lambda: ExitPlaceSettlementCommand(),
             "start_place_road": lambda: StartPlaceRoadCommand(),
             "exit_place_road": lambda: ExitPlaceRoadCommand(),
-            "start_game": lambda: StartGameCommand(game=kwargs["game"], **kwargs),
-            "end_game": lambda: EndGameCommand(game=kwargs["game"], **kwargs),
-            "get_state": lambda: GetStateCommand(game=kwargs["game"], **kwargs),
         }
         if command_name not in mapping:
             raise ValueError(f"Unknown command: {command_name}")

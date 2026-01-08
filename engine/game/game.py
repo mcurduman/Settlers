@@ -194,6 +194,7 @@ class Game:
 
         edge.owner = player.name
         player.add_road(a, b)
+        self._update_longest_road_holder()
 
     def handle_trade_with_bank(self, player, give_resource, receive_resource, rate):
         if give_resource == receive_resource:
@@ -206,12 +207,6 @@ class Game:
 
         player.remove_resource(give_resource, rate)
         player.add_resource(receive_resource, 1)
-
-    def handle_start_game(self, **kwargs):
-        return {"message": "Game started."}
-
-    def handle_end_game(self, **kwargs):
-        return {"message": "Game ended."}
 
     def handle_get_state(self, **kwargs):
         return self.get_state()

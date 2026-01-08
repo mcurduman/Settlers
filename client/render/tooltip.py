@@ -4,6 +4,9 @@ from client.assets.theme.fonts import FONTS_PATH
 
 
 def draw_tooltip(screen, text, mouse_pos):
+    """
+    Draws a tooltip with the given text at the mouse position, clamped to the screen.
+    """
     font = pygame.font.Font(FONTS_PATH["bold"], 14)
     padding = 6
     offset = 12

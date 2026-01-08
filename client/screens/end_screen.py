@@ -7,6 +7,9 @@ WIDTH, HEIGHT = 1000, 700
 
 class EndScreen:
     def __init__(self, screen, players, winner_name):
+        """
+        Initializes the EndScreen with player stats and winner information.
+        """
         self.screen = screen
         self.players = players
         self.winner_name = winner_name
@@ -18,6 +21,9 @@ class EndScreen:
         self.back_btn_rect = pygame.Rect(WIDTH // 2 - 80, HEIGHT - 100, 160, 50)
 
     def draw(self):
+        """
+        Draws the end screen, including winner, player stats, and back button.
+        """
         self.screen.blit(self.bg, (0, 0))
         title = self.font_title.render("Game Over!", True, PALETTE["sand"])
         self.screen.blit(title, title.get_rect(center=(WIDTH // 2, 100)))
@@ -64,6 +70,9 @@ class EndScreen:
         pygame.display.flip()
 
     def run(self):
+        """
+        Main loop for the end screen. Handles drawing and user input for exit/back.
+        """
         clock = pygame.time.Clock()
         while True:
             clock.tick(60)

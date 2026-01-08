@@ -9,6 +9,9 @@ class StartScreen:
     # EXIT button
 
     def __init__(self, screen):
+        """
+        Initializes the StartScreen with background, fonts, and button rects.
+        """
         self.screen = screen
 
         self.font_title = pygame.font.Font(FONTS_PATH["extra_bold"], 64)
@@ -29,6 +32,9 @@ class StartScreen:
         self.exit_rect = pygame.Rect(WIDTH // 2 - 60, HEIGHT - 80, 120, 44)
 
     def draw_button(self, rect, base_color, text, hover=False):
+        """
+        Draws a main menu button with optional hover effect.
+        """
         color = tuple(min(255, c + 20) for c in base_color) if hover else base_color
 
         pygame.draw.rect(
@@ -63,6 +69,9 @@ class StartScreen:
         self.screen.blit(label, label.get_rect(center=rect.center))
 
     def run(self):
+        """
+        Main loop for the start screen. Handles drawing and user input for menu selection.
+        """
         clock = pygame.time.Clock()
 
         while True:
@@ -74,6 +83,9 @@ class StartScreen:
                 return result
 
     def draw_screen(self):
+        """
+        Draws the full start screen, including title and all buttons.
+        """
         # Background
         self.screen.blit(self.bg, (0, 0))
 
@@ -114,6 +126,9 @@ class StartScreen:
         self.draw_exit_button(exit_hover)
 
     def draw_exit_button(self, hover):
+        """
+        Draws the EXIT button with hover effect.
+        """
         pygame.draw.rect(
             self.screen,
             (200, 40, 40) if not hover else (220, 80, 80),
@@ -126,6 +141,9 @@ class StartScreen:
         self.screen.blit(txt, txt.get_rect(center=self.exit_rect.center))
 
     def handle_events(self):
+        """
+        Handles all pygame events for the start screen, including button clicks and exit.
+        """
         mouse_pos = pygame.mouse.get_pos()
         easy_hover = self.easy_rect.collidepoint(mouse_pos)
         hard_hover = self.hard_rect.collidepoint(mouse_pos)
