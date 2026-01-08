@@ -2,16 +2,16 @@ from enum import Enum
 
 
 class ResourceType(str, Enum):
-    FOREST = "forest"
-    CLAY = "clay"
+    WOOD = "wood"
+    BRICK = "brick"
     SHEEP = "sheep"
     WHEAT = "wheat"
     DESERT = "desert"
 
 
 RESOURCE_DISTRIBUTION = {
-    ResourceType.FOREST: 2,
-    ResourceType.CLAY: 2,
+    ResourceType.WOOD: 2,
+    ResourceType.BRICK: 2,
     ResourceType.SHEEP: 1,
     ResourceType.WHEAT: 1,
     ResourceType.DESERT: 1,

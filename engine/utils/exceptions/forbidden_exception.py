@@ -7,4 +7,4 @@ class ForbiddenException(BaseAppException):
     def __init__(
         self, message: str = "You do not have permission to access this resource"
     ):
-        super().__init__(message, status_code=403)
+        super().__init__(message)

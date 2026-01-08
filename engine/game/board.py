@@ -99,11 +99,16 @@ class Board:
         return list(self.edges.values())
 
     def longest_road(self, player) -> int:
-        graph = defaultdict(list)
-
         if not player.roads:
             return 0
 
+        blocked_nodes = {
+            pos
+            for pos, node in self.nodes.items()
+            if node.owner is not None and node.owner != player.name
+        }
+
+        graph = defaultdict(list)
         for a, b in player.roads:
             graph[a].append(b)
             graph[b].append(a)
@@ -112,15 +117,26 @@ class Board:
             max_len = 0
             for neighbor in graph[node]:
                 edge = tuple(sorted((node, neighbor)))
-                if edge not in visited_edges:
-                    visited_edges.add(edge)
-                    max_len = max(max_len, 1 + dfs(neighbor, visited_edges))
-                    visited_edges.remove(edge)
+                if edge in visited_edges:
+                    continue
+
+                if neighbor in blocked_nodes:
+                    continue
+
+                visited_edges.add(edge)
+                max_len = max(max_len, 1 + dfs(neighbor, visited_edges))
+                visited_edges.remove(edge)
+
             return max_len
 
         return max(dfs(node, set()) for node in graph)
 
-    def produce_resources(self, dice_value: int) -> List[ResourceType]:
+    def produce_resources(
+        self, dice_value: int, player_name: str
+    ) -> List[ResourceType]:
+        """
+        Return resources produced for the given player only (for their settlements).
+        """
         produced_resources: List[ResourceType] = []
 
         for tile in self.tiles:
@@ -129,10 +145,70 @@ class Board:
                     key = normalize(corner)
                     node = self.nodes.get(key)
 
-                    if node and node.owner is not None:
+                    if node and node.owner == player_name:
                         produced_resources.append(tile.resource)
 
         return produced_resources
+
+    def edge_connected_to_network(self, edge, player):
+        a, b = edge.a, edge.b if hasattr(edge, "a") else (edge["a"], edge["b"])
+
+        # 1. settlement la capăt
+        for pos in player.settlements:
+            if pos == a or pos == b:
+                return True
+
+        # 2. drum adiacent
+        for ra, rb in player.roads:
+            if a in (ra, rb) or b in (ra, rb):
+                return True
+
+        return False
+
+    def edge_connected_to_settlement(self, edge, player):
+        a, b = edge.a, edge.b if hasattr(edge, "a") else (edge["a"], edge["b"])
+
+        for pos in player.settlements:
+            if pos == a or pos == b:
+                return True
+
+        return False
+
+    def node_has_adjacent_settlement(self, node_pos):
+        for edge in self.edges.values():
+            a, b = edge.a, edge.b
+            if node_pos == a:
+                other = b
+            elif node_pos == b:
+                other = a
+            else:
+                continue
+
+            if other in self.nodes and self.nodes[other].owner is not None:
+                return True
+
+        return False
+
+    def node_connected_to_player_road(self, node_pos, player):
+        for a, b in player.roads:
+            if node_pos == a or node_pos == b:
+                return True
+        return False
+
+    def valid_settlement_node(self, node_pos, player):
+        node = self.nodes.get(node_pos)
+        if node is None or node.owner is not None:
+            return False
+
+        # distance rule (indiferent de owner)
+        if self.node_has_adjacent_settlement(node_pos):
+            return False
+
+        # must connect to at least ONE of your roads
+        if not self.node_connected_to_player_road(node_pos, player):
+            return False
+
+        return True
 
     def debug_summary(self) -> dict:
         return {

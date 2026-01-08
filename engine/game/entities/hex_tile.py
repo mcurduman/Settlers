@@ -15,7 +15,6 @@ class HexTile(BaseModel):
     )
 
     def center(self, size: float = 1.0) -> Tuple[float, float]:
-        # axial -> pixel (pointy-top)
         x = size * math.sqrt(3) * (self.q + self.r / 2)
         y = size * 1.5 * self.r
         return (x, y)
@@ -25,7 +24,6 @@ class HexTile(BaseModel):
         corners = []
 
         for i in range(6):
-            # 60 degrees in radians, offset by -30 degrees for pointy-top hexes
             angle = math.radians(60 * i - 30)
             x = cx + size * math.cos(angle)
             y = cy + size * math.sin(angle)

@@ -1,5 +1,6 @@
 import pygame
 from client.assets.theme.colors import PALETTE
+from client.assets.theme.fonts import FONTS_PATH
 
 WIDTH, HEIGHT = 1000, 700
 
@@ -10,11 +11,9 @@ class StartScreen:
     def __init__(self, screen):
         self.screen = screen
 
-        self.font_title = pygame.font.Font(
-            "client/assets/fonts/Cinzel-ExtraBold.ttf", 64
-        )
+        self.font_title = pygame.font.Font(FONTS_PATH["extra_bold"], 64)
 
-        self.font_btn = pygame.font.Font("client/assets/fonts/Cinzel-Bold.ttf", 30)
+        self.font_btn = pygame.font.Font(FONTS_PATH["bold"], 30)
 
         self.bg = pygame.image.load("client/assets/backgrounds/start_2.png").convert()
         self.bg = pygame.transform.scale(self.bg, (WIDTH, HEIGHT))
@@ -68,68 +67,79 @@ class StartScreen:
 
         while True:
             clock.tick(60)
-
-            # Background
-            self.screen.blit(self.bg, (0, 0))
-
-            mouse_pos = pygame.mouse.get_pos()
-
-            # Title
-            title = self.font_title.render(
-                "Mini Settlers",
-                True,
-                PALETTE["sand"],
-            )
-            self.screen.blit(
-                title,
-                title.get_rect(center=(WIDTH // 2, 180)),
-            )
-
-            # Hover detection
-            easy_hover = self.easy_rect.collidepoint(mouse_pos)
-            hard_hover = self.hard_rect.collidepoint(mouse_pos)
-
-            # Buttons
-            self.draw_button(
-                self.easy_rect,
-                PALETTE["mint"],
-                "EASY",
-                easy_hover,
-            )
-
-            self.draw_button(
-                self.hard_rect,
-                PALETTE["orange_dark"],
-                "HARD",
-                hard_hover,
-            )
-
-            # EXIT BUTTON
-            exit_hover = self.exit_rect.collidepoint(mouse_pos)
-            pygame.draw.rect(
-                self.screen,
-                (200, 40, 40) if not exit_hover else (220, 80, 80),
-                self.exit_rect,
-                border_radius=12,
-            )
-            pygame.draw.rect(
-                self.screen, (60, 0, 0), self.exit_rect, 2, border_radius=12
-            )
-            font_exit = pygame.font.Font("client/assets/fonts/Cinzel-Bold.ttf", 22)
-            txt = font_exit.render("EXIT", True, (255, 255, 255))
-            self.screen.blit(txt, txt.get_rect(center=self.exit_rect.center))
-
+            self.draw_screen()
             pygame.display.flip()
+            result = self.handle_events()
+            if result is not None:
+                return result
 
-            #Events
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    return None
+    def draw_screen(self):
+        # Background
+        self.screen.blit(self.bg, (0, 0))
 
-                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                    if easy_hover:
-                        return "easy"
-                    if hard_hover:
-                        return "hard"
-                    if exit_hover:
-                        return None
+        mouse_pos = pygame.mouse.get_pos()
+
+        # Title
+        title = self.font_title.render(
+            "Mini Settlers",
+            True,
+            PALETTE["sand"],
+        )
+        self.screen.blit(
+            title,
+            title.get_rect(center=(WIDTH // 2, 180)),
+        )
+
+        # Hover detection
+        easy_hover = self.easy_rect.collidepoint(mouse_pos)
+        hard_hover = self.hard_rect.collidepoint(mouse_pos)
+        exit_hover = self.exit_rect.collidepoint(mouse_pos)
+
+        # Buttons
+        self.draw_button(
+            self.easy_rect,
+            PALETTE["mint"],
+            "EASY",
+            easy_hover,
+        )
+
+        self.draw_button(
+            self.hard_rect,
+            PALETTE["orange_dark"],
+            "HARD",
+            hard_hover,
+        )
+
+        # EXIT BUTTON
+        self.draw_exit_button(exit_hover)
+
+    def draw_exit_button(self, hover):
+        pygame.draw.rect(
+            self.screen,
+            (200, 40, 40) if not hover else (220, 80, 80),
+            self.exit_rect,
+            border_radius=12,
+        )
+        pygame.draw.rect(self.screen, (60, 0, 0), self.exit_rect, 2, border_radius=12)
+        font_exit = pygame.font.Font(FONTS_PATH["bold"], 22)
+        txt = font_exit.render("EXIT", True, (255, 255, 255))
+        self.screen.blit(txt, txt.get_rect(center=self.exit_rect.center))
+
+    def handle_events(self):
+        mouse_pos = pygame.mouse.get_pos()
+        easy_hover = self.easy_rect.collidepoint(mouse_pos)
+        hard_hover = self.hard_rect.collidepoint(mouse_pos)
+        exit_hover = self.exit_rect.collidepoint(mouse_pos)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return "window_close"
+
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if easy_hover:
+                    return "easy"
+                if hard_hover:
+                    return "hard"
+                if exit_hover:
+                    return "exit"
+        return None
