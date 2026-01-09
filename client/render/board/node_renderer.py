@@ -2,7 +2,10 @@ import pygame
 
 from client.assets.theme.colors import PALETTE
 from client.render.coord import world_to_screen
-from client.render.render_helpers import is_valid_settlement_node
+from client.render.render_helpers import (
+    is_valid_settlement_node,
+    is_valid_setup_settlement_node,
+)
 
 from .board_constants import NODE_RADIUS
 
@@ -43,8 +46,11 @@ def _draw_unowned_node(screen, pos, phase, board, node, current_player):
             pygame.draw.circle(screen, PALETTE["mint"], pos, NODE_RADIUS)
 
     elif phase == "SetupPlaceSettlementState":
-        pygame.draw.circle(screen, PALETTE["mint"], pos, NODE_RADIUS)
-        pygame.draw.circle(screen, (255, 255, 255), pos, NODE_RADIUS + 3, 3)
+        if is_valid_setup_settlement_node(board, tuple(node["position"])):
+            pygame.draw.circle(screen, PALETTE["mint"], pos, NODE_RADIUS)
+            pygame.draw.circle(screen, (255, 255, 255), pos, NODE_RADIUS + 3, 3)
+        else:
+            pygame.draw.circle(screen, PALETTE["mint"], pos, NODE_RADIUS)
 
     else:
         pygame.draw.circle(screen, PALETTE["mint"], pos, NODE_RADIUS)

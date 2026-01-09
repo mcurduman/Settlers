@@ -2,9 +2,13 @@ import math
 
 import pygame
 
-from client.input.helpers import (edge_connected_to_network,
-                                  edge_connected_to_player,
-                                  is_valid_settlement_node, point_near_segment)
+from client.input.helpers import (
+    edge_connected_to_network,
+    edge_connected_to_player,
+    is_valid_settlement_node,
+    point_near_segment,
+    is_valid_setup_settlement_node,
+)
 from client.render.board.board_constants import NODE_RADIUS
 from client.render.coord import world_to_screen
 
@@ -18,6 +22,9 @@ def handle_setup_place_settlement(event, state, game, board_rect):
 
     for node in state["board"]["nodes"]:
         if node["owner"] is not None:
+            continue
+
+        if not is_valid_setup_settlement_node(state["board"], tuple(node["position"])):
             continue
 
         screen_pos = world_to_screen(node["position"], board_rect)
