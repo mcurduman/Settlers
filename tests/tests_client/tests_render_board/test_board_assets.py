@@ -1,5 +1,5 @@
-import pytest
-from unittest.mock import patch, Mock
+from unittest.mock import Mock
+
 from client.render.board import board_assets
 
 

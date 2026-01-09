@@ -1,4 +1,5 @@
 import pytest
+
 from engine.game.commands.command_factory import CommandFactory
 from engine.game.entities.resource_type import ResourceType
 

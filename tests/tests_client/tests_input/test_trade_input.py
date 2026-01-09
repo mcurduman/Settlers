@@ -1,13 +1,12 @@
-import pytest
-from unittest.mock import Mock
-import types
 import sys
+import types
+from unittest.mock import Mock
+
+import pytest
 
 
 @pytest.fixture(autouse=True)
 def patch_pygame(monkeypatch):
-    import sys
-
     sys.modules["pygame"] = types.SimpleNamespace(MOUSEBUTTONDOWN=1, mouse=Mock())
     yield
 

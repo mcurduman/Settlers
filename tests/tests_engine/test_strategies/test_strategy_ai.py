@@ -1,4 +1,5 @@
 import pytest
+
 from engine.game.strategies.strategy_ai import StrategyAI
 
 

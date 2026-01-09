@@ -1,6 +1,6 @@
-import pytest
-from unittest.mock import patch, Mock
+from unittest.mock import Mock
 from client.render.board import board_assets
+
 
 def test_load_tile_icons_caching(monkeypatch):
     board_assets._TILE_ICONS.clear()
@@ -27,5 +27,9 @@ def test_load_tile_icons_caching(monkeypatch):
     fake_img.get_rect.return_value.center = (0, 0)
     fake_img.get_rect.return_value = Mock()
     fake_img.get_rect.return_value.center = (0, 0)
-    monkeypatch.setattr(board_assets.pygame, "image", Mock(load=Mock(return_value=fake_img)))
-    monkeypatch.setattr(board_assets.pygame, "transform", Mock(smoothscale=Mock(return_value=fake_img)))
+    monkeypatch.setattr(
+        board_assets.pygame, "image", Mock(load=Mock(return_value=fake_img))
+    )
+    monkeypatch.setattr(
+        board_assets.pygame, "transform", Mock(smoothscale=Mock(return_value=fake_img))
+    )

@@ -7,7 +7,8 @@ from engine.game.game import Game
 from engine.game.players.ai_player import AIPlayer
 from engine.game.players.human_player import HumanPlayer
 from engine.services.ai_action_describer import describe_ai_action
-from engine.utils.exceptions.game_not_started_exception import GameNotStartedException
+from engine.utils.exceptions.game_not_started_exception import \
+    GameNotStartedException
 
 
 class GameService:

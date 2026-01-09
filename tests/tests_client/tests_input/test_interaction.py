@@ -1,10 +1,8 @@
-import pytest
 from unittest.mock import Mock
-import types
-import sys
+
+import pytest
 
 
-# Patch pygame.Rect for board_rect
 class DummyRect:
     pass
 
@@ -33,10 +31,8 @@ def make_state(state_name):
 
 
 def test_handle_interaction_setup_place_settlement():
-    from client.input.interaction import (
-        handle_interaction,
-        handle_setup_place_settlement,
-    )
+    from client.input.interaction import (handle_interaction,
+                                          handle_setup_place_settlement)
 
     event = make_event()
     state = make_state("SetupPlaceSettlementState")
@@ -47,7 +43,8 @@ def test_handle_interaction_setup_place_settlement():
 
 
 def test_handle_interaction_setup_place_road():
-    from client.input.interaction import handle_interaction, handle_setup_place_road
+    from client.input.interaction import (handle_interaction,
+                                          handle_setup_place_road)
 
     event = make_event()
     state = make_state("SetupPlaceRoadState")
@@ -58,10 +55,8 @@ def test_handle_interaction_setup_place_road():
 
 
 def test_handle_interaction_playing_main_and_roll_states():
-    from client.input.interaction import (
-        handle_interaction,
-        handle_roll_and_main_state_ui,
-    )
+    from client.input.interaction import (handle_interaction,
+                                          handle_roll_and_main_state_ui)
 
     event = make_event()
     for s in ["PlayingMainState", "SetupRollState", "PlayingRollState"]:
@@ -74,12 +69,10 @@ def test_handle_interaction_playing_main_and_roll_states():
 
 
 def test_handle_interaction_playing_place_states():
-    from client.input.interaction import (
-        handle_interaction,
-        handle_cancel_placement_ui,
-        handle_playing_place_road,
-        handle_playing_place_settlement,
-    )
+    from client.input.interaction import (handle_cancel_placement_ui,
+                                          handle_interaction,
+                                          handle_playing_place_road,
+                                          handle_playing_place_settlement)
 
     event = make_event()
     for s in ["PlayingPlaceRoadState", "PlayingPlaceSettlementState"]:
@@ -98,7 +91,8 @@ def test_handle_interaction_playing_place_states():
 
 
 def test_handle_interaction_playing_trade_with_bank():
-    from client.input.interaction import handle_interaction, handle_trade_with_bank
+    from client.input.interaction import (handle_interaction,
+                                          handle_trade_with_bank)
 
     event = make_event()
     state = make_state("PlayingTradeWithBankState")

@@ -1,6 +1,5 @@
-import pytest
-from unittest.mock import patch, Mock
 import sys
+from unittest.mock import Mock, patch
 
 
 def setup_pygame_mocks():

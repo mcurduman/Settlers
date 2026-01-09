@@ -1,8 +1,7 @@
 from engine.game.states.setup.setup_roll_state import SetupRollState
 from engine.game.strategies.adaptive_ai import AdaptiveAIStrategy
-from engine.utils.exceptions.not_enough_resources_for_trade_exception import (
-    NotEnoughResourcesForTradeException,
-)
+from engine.utils.exceptions.not_enough_resources_for_trade_exception import \
+    NotEnoughResourcesForTradeException
 from engine.utils.exceptions.road_exception import RoadException
 from engine.utils.exceptions.settlement_exception import SettlementException
 

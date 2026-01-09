@@ -1,5 +1,7 @@
-import pytest
 from unittest.mock import Mock, patch
+
+import pytest
+
 from engine.game.strategies.hard_ai import HardAIStrategy
 
 
@@ -48,11 +50,11 @@ def test_choose_action_setup_place_settlement(dummy_game_state, dummy_player):
 def test_choose_action_setup_place_road(dummy_game_state, dummy_player):
     ai = HardAIStrategy()
     dummy_game_state["state"] = "SetupPlaceRoadState"
-    with patch.object(ai, "pick_setup_target_node", return_value=(1, 1)):
-        with patch.object(
-            ai, "pick_road_towards_target", return_value=((0, 0), (1, 1))
-        ):
-            result = ai.choose_action(dummy_game_state, dummy_player)
+    with patch(
+        "engine.game.strategies.ai_helper.edges_touching_network",
+        return_value=[((0, 0), (1, 1))],
+    ):
+        result = ai.choose_action(dummy_game_state, dummy_player)
     assert result["command"] == "place_road"
 
 
@@ -98,8 +100,7 @@ def test_distance_to_network(dummy_player):
 
 
 def test_reached_target(dummy_player):
-    ai = HardAIStrategy()
-    assert ai.reached_target(dummy_player, (0, 0))
+    pass  # Method removed from HardAIStrategy
 
 
 def test_pick_road_towards_target(dummy_game_state, dummy_player):
@@ -111,7 +112,7 @@ def test_pick_road_towards_target(dummy_game_state, dummy_player):
 def test_smart_trade():
     ai = HardAIStrategy()
     resources = {"wood": 0, "brick": 3, "wheat": 0, "sheep": 0}
-    trade = ai.smart_trade(resources)
+    trade = ai.smart_trade(resources, intent="settlement")
     if trade:
         assert set(trade.keys()) == {"give", "receive", "rate"}
 

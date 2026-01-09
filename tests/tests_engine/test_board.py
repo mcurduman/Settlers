@@ -1,4 +1,5 @@
 import pytest
+
 from engine.game.board import Board
 from engine.game.entities.resource_type import ResourceType
 

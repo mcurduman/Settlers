@@ -1,4 +1,3 @@
-import pytest
 from client.input import helpers
 
 

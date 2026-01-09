@@ -1,4 +1,3 @@
-import pytest
 from client.render.panel import panel_actions
 
 

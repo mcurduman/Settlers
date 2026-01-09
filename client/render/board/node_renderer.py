@@ -2,10 +2,8 @@ import pygame
 
 from client.assets.theme.colors import PALETTE
 from client.render.coord import world_to_screen
-from client.render.render_helpers import (
-    is_valid_settlement_node,
-    is_valid_setup_settlement_node,
-)
+from client.render.render_helpers import (is_valid_settlement_node,
+                                          is_valid_setup_settlement_node)
 
 from .board_constants import NODE_RADIUS
 

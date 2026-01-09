@@ -2,13 +2,11 @@ import math
 
 import pygame
 
-from client.input.helpers import (
-    edge_connected_to_network,
-    edge_connected_to_player,
-    is_valid_settlement_node,
-    point_near_segment,
-    is_valid_setup_settlement_node,
-)
+from client.input.helpers import (edge_connected_to_network,
+                                  edge_connected_to_player,
+                                  is_valid_settlement_node,
+                                  is_valid_setup_settlement_node,
+                                  point_near_segment)
 from client.render.board.board_constants import NODE_RADIUS
 from client.render.coord import world_to_screen
 

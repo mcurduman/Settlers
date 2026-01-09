@@ -1,7 +1,10 @@
-import pytest
 import os
+
+import pytest
+
 from engine.services.game_service import GameService
-from engine.utils.exceptions.game_not_started_exception import GameNotStartedException
+from engine.utils.exceptions.game_not_started_exception import \
+    GameNotStartedException
 
 
 @pytest.fixture
