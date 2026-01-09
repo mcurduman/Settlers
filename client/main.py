@@ -19,12 +19,12 @@ def main():
     while running:
 
         start_screen = StartScreen(screen)
-        difficulty = start_screen.run()
+        action = start_screen.run()
 
-        if difficulty in (None, "exit", "window_close"):
+        if action in (None, "exit", "window_close"):
             break
 
-        game_screen = GameScreen(screen, difficulty)
+        game_screen = GameScreen(screen)
         exit_info = game_screen.run()
 
         if exit_info["exit_type"] == "window_close":

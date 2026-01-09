@@ -7,8 +7,7 @@ from engine.game.game import Game
 from engine.game.players.ai_player import AIPlayer
 from engine.game.players.human_player import HumanPlayer
 from engine.services.ai_action_describer import describe_ai_action
-from engine.utils.exceptions.game_not_started_exception import \
-    GameNotStartedException
+from engine.utils.exceptions.game_not_started_exception import GameNotStartedException
 
 
 class GameService:
@@ -22,14 +21,14 @@ class GameService:
         """
         self._game: Game | None = None
 
-    def start_game(self, difficulty: str):
+    def start_game(self):
         """
         Initializes a new game.
         """
         human = HumanPlayer(name="Human")
         ai = AIPlayer(name="AI")
         board = Board()
-        self._game = Game(players=[human, ai], board=board, difficulty=difficulty)
+        self._game = Game(players=[human, ai], board=board)
 
     def end_game(self):
         """
@@ -106,8 +105,11 @@ class GameService:
             print("Current player is not AI. Skipping AI turn.")
             return
 
-        action = self._game.ai_strategy.choose_action(self._game.get_state(), player)
-        self.execute_ai_command(action["command"], **action["kwargs"])
-        self._game.ai_action_description = describe_ai_action(
-            self._game, action["command"], action["kwargs"]
-        )
+        action = self._game.handle_ai_strategy(player)
+        if action:
+            self.execute_ai_command(action["command"], **action["kwargs"])
+            self._game.ai_action_description = describe_ai_action(
+                self._game, action["command"], action["kwargs"]
+            )
+        else:
+            print("No action returned by AI strategy.")

@@ -1,8 +1,14 @@
 import random
 
-from engine.game.strategies.ai_helper import (edges_touching_network,
-                                              free_edges,
-                                              is_desert_plus_resource)
+from engine.game.strategies.ai_helper import (
+    edges_touching_network,
+    free_edges,
+    is_desert_plus_resource,
+    can_try_road,
+    can_try_settlement,
+    can_try_trade,
+    get_player_resources,
+)
 from engine.game.strategies.strategy_ai import StrategyAI
 
 
@@ -40,14 +46,14 @@ class EasyAIStrategy(StrategyAI):
         return {"command": "roll_dice", "kwargs": {}}
 
     def _action_playing_main(self, game_state, player):
-        resources = StrategyAI.get_player_resources(game_state, player)
+        resources = get_player_resources(game_state, player)
         possible_actions = ["end_turn"]
 
-        if StrategyAI.can_try_road(resources):
+        if can_try_road(resources):
             possible_actions.append("road")
-        if StrategyAI.can_try_settlement(resources):
+        if can_try_settlement(resources):
             possible_actions.append("settlement")
-        if StrategyAI.can_try_trade(resources):
+        if can_try_trade(resources):
             possible_actions.append("trade")
 
         if not possible_actions:

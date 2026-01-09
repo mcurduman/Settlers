@@ -1,13 +1,14 @@
 from engine.game.states.setup.setup_roll_state import SetupRollState
-from engine.game.strategies.strategy_factory import get_ai_strategy
-from engine.utils.exceptions.not_enough_resources_for_trade_exception import \
-    NotEnoughResourcesForTradeException
+from engine.game.strategies.adaptive_ai import AdaptiveAIStrategy
+from engine.utils.exceptions.not_enough_resources_for_trade_exception import (
+    NotEnoughResourcesForTradeException,
+)
 from engine.utils.exceptions.road_exception import RoadException
 from engine.utils.exceptions.settlement_exception import SettlementException
 
 
 class Game:
-    def __init__(self, players, board, difficulty=None):
+    def __init__(self, players, board):
         self.players = players
         self.board = board
         self.state = SetupRollState()  # Start with setup roll states
@@ -18,8 +19,7 @@ class Game:
         self.current_player_index = 0
         self.current_player_roll = 0
 
-        self.difficulty = difficulty
-        self.ai_strategy = get_ai_strategy(difficulty) if difficulty else None
+        self.ai_strategy = AdaptiveAIStrategy()
         self.ai_action_description = None
         self.longest_road_holder = None
 
@@ -102,7 +102,9 @@ class Game:
             player: self.board.longest_road(player) for player in self.players
         }
 
-        eligible = {p: l for p, l in road_lengths.items() if l >= MIN_LENGTH}
+        eligible = {
+            p: length for p, length in road_lengths.items() if length >= MIN_LENGTH
+        }
         if not eligible:
             if self.longest_road_holder:
                 self.longest_road_holder.victory_points -= 1
@@ -110,7 +112,7 @@ class Game:
             return
 
         max_length = max(eligible.values())
-        contenders = [p for p, l in eligible.items() if l == max_length]
+        contenders = [p for p, length in eligible.items() if length == max_length]
 
         if self.longest_road_holder in contenders:
             return
@@ -227,3 +229,9 @@ class Game:
 
     def handle_get_state(self, **kwargs):
         return self.get_state()
+
+    def handle_ai_strategy(self, player):
+        if not player.is_ai():
+            return
+        self.ai_strategy.update_strategy(ai_player=player, human_player=self.players[0])
+        return self.ai_strategy.choose_action(self.get_state(), player)

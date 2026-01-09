@@ -14,11 +14,11 @@ PANEL_WIDTH = WIDTH - BOARD_WIDTH
 
 
 class GameScreen:
-    def __init__(self, screen, difficulty):
+    def __init__(self, screen):
         self.screen = screen
 
         self.game = GameService()
-        self.game.start_game(difficulty)
+        self.game.start_game()
         self.state = self.game.get_state()
         self.last_state = (
             self.state.copy() if hasattr(self.state, "copy") else dict(self.state)

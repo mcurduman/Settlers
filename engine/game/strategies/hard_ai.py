@@ -1,6 +1,13 @@
 import math
 
-from engine.game.strategies.ai_helper import edges_touching_network, free_edges
+from engine.game.strategies.ai_helper import (
+    edges_touching_network,
+    free_edges,
+    can_try_trade,
+    can_try_road,
+    can_try_settlement,
+    get_player_resources,
+)
 from engine.game.strategies.strategy_ai import StrategyAI
 
 DICE_SCORE = {
@@ -46,16 +53,16 @@ class HardAIStrategy(StrategyAI):
             return {"command": "place_road", "kwargs": {"a": edge[0], "b": edge[1]}}
 
         if state == "PlayingMainState":
-            resources = StrategyAI.get_player_resources(game_state, player)
+            resources = get_player_resources(game_state, player)
             target = self.choose_target_node(game_state)
 
-            if StrategyAI.can_try_settlement(resources):
+            if can_try_settlement(resources):
                 return {
                     "command": "place_settlement",
                     "kwargs": {"position": target},
                 }
 
-            if StrategyAI.can_try_road(resources):
+            if can_try_road(resources):
                 edge = self.pick_road_towards_target(game_state, player, target)
                 return {
                     "command": "place_road",

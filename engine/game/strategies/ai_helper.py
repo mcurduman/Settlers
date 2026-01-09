@@ -56,3 +56,27 @@ def edges_touching_network(game_state, player):
             edges.append((a, b))
 
     return edges
+
+
+def get_player_resources(game_state, player):
+    for p in game_state["players"]:
+        if p["name"] == player.name:
+            return p["resources"]
+    return {}
+
+
+def can_try_settlement(resources):
+    return (
+        resources.get("wood", 0) >= 1
+        and resources.get("brick", 0) >= 1
+        and resources.get("wheat", 0) >= 1
+        and resources.get("sheep", 0) >= 1
+    )
+
+
+def can_try_road(resources):
+    return resources.get("wood", 0) >= 1 and resources.get("brick", 0) >= 1
+
+
+def can_try_trade(resources, rate=3):
+    return any(v >= rate for v in resources.values())
