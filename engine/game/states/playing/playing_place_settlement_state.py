@@ -1,10 +1,10 @@
-from engine.game.states.game_state import GameState
+from engine.game.commands.exit_place_settlement_command import \
+    ExitPlaceSettlementCommand
 from engine.game.commands.place_settlement import PlaceSettlementCommand
-from engine.game.commands.exit_place_settlement_command import (
-    ExitPlaceSettlementCommand,
-)
-from engine.utils.exceptions.invalid_command_exception import InvalidCommandException
+from engine.game.states.game_state import GameState
 from engine.game.states.state_factory import get_state
+from engine.utils.exceptions.invalid_command_exception import \
+    InvalidCommandException
 
 
 class PlayingPlaceSettlementState(GameState):

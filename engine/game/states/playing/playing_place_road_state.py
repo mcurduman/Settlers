@@ -1,8 +1,9 @@
-from engine.game.states.game_state import GameState
-from engine.game.commands.place_road import PlaceRoadCommand
 from engine.game.commands.exit_place_road_command import ExitPlaceRoadCommand
-from engine.utils.exceptions.invalid_command_exception import InvalidCommandException
+from engine.game.commands.place_road import PlaceRoadCommand
+from engine.game.states.game_state import GameState
 from engine.game.states.state_factory import get_state
+from engine.utils.exceptions.invalid_command_exception import \
+    InvalidCommandException
 
 
 class PlayingPlaceRoadState(GameState):

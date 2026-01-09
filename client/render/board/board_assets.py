@@ -1,4 +1,5 @@
 import pygame
+
 from .board_constants import HEX_SIZE
 
 _TILE_ICONS = {}

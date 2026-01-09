@@ -1,11 +1,9 @@
-from .ui_input import handle_roll_and_main_state_ui, handle_cancel_placement_ui
-from .board_input import (
-    handle_setup_place_settlement,
-    handle_setup_place_road,
-    handle_playing_place_settlement,
-    handle_playing_place_road,
-)
+from .board_input import (handle_playing_place_road,
+                          handle_playing_place_settlement,
+                          handle_setup_place_road,
+                          handle_setup_place_settlement)
 from .trade_input import handle_trade_with_bank
+from .ui_input import handle_cancel_placement_ui, handle_roll_and_main_state_ui
 
 
 def handle_interaction(

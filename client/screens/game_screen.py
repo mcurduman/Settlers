@@ -1,10 +1,12 @@
 import pygame
-from engine.services.game_service import GameService
+
+from client.assets.theme.fonts import FONTS_PATH
+from client.input.interaction import handle_interaction
+from client.render.ai_overlay import draw_ai_action
 from client.render.board.board_renderer import draw_board
 from client.render.panel.panel_renderer import draw_panel
 from client.render.tooltip import draw_tooltip
-from client.input.interaction import handle_interaction
-from client.assets.theme.fonts import FONTS_PATH
+from engine.services.game_service import GameService
 
 WIDTH, HEIGHT = 1000, 700
 BOARD_WIDTH = int(WIDTH * 2 / 3)
@@ -30,6 +32,9 @@ class GameScreen:
 
         self.clock = pygame.time.Clock()
         self.running = True
+
+        self.last_ai_tick = 0
+        self.AI_DELAY = 3000  # ms
 
         self.ui = {
             "panel": {},
@@ -149,6 +154,9 @@ class GameScreen:
         if "hovered_tooltip" in locals() and hovered_tooltip:
             draw_tooltip(self.screen, hovered_tooltip[0], hovered_tooltip[1])
 
+        if self.game.ai_action_description:
+            draw_ai_action(self.screen, self.game.ai_action_description)
+
         pygame.display.flip()
 
     def run(self):
@@ -162,6 +170,18 @@ class GameScreen:
                 return {"exit_type": "exit_btn", "state": self.last_state}
             if self.update():
                 return {"exit_type": "game_ended", "state": self.last_state}
+
+            now = pygame.time.get_ticks()
+            if str(self.state.get("current_player")).upper() == "AI":
+                if now - self.last_ai_tick > self.AI_DELAY:
+                    self.game.handle_ai_turn()
+                    self.last_ai_tick = now
+                    self.game.ai_action_description = self.game.get_state().get(
+                        "ai_action_description"
+                    )
+            else:
+                self.game.ai_action_description = None
+
             self.draw()
 
         return {"exit_type": "window_close", "state": self.last_state}

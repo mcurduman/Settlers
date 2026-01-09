@@ -1,8 +1,8 @@
 import pygame
 
-from client.screens.start_screen import StartScreen
 from client.screens.end_screen import EndScreen
 from client.screens.game_screen import GameScreen
+from client.screens.start_screen import StartScreen
 
 WIDTH, HEIGHT = 1000, 700
 BG_COLOR = (15, 23, 42)

@@ -4,8 +4,9 @@ from client.assets.theme.colors import PALETTE
 from client.assets.theme.fonts import FONTS_PATH
 from client.assets.theme.resource_colors import RESOURCE_COLORS
 from client.render.tooltip import draw_tooltip
-from .panel_assets import get_resource_icons
+
 from .buttons import draw_roll_button
+from .panel_assets import get_resource_icons
 
 
 def draw_stats_row(
@@ -194,7 +195,11 @@ def draw_player_card(
         pass
 
     roll_button_rect = None
-    if is_current and state["state"] in {"SetupRollState", "PlayingRollState"}:
+    if (
+        is_current
+        and state["state"] in {"SetupRollState", "PlayingRollState"}
+        and str(player.get("name")).lower() == "human"
+    ):
         roll_button_rect = pygame.Rect(
             dice_rect.x - 70,
             dice_rect.y + 10,

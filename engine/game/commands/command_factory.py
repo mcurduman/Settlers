@@ -1,18 +1,18 @@
-from engine.game.commands.roll_dice import RollDiceCommand
-from engine.game.commands.place_road import PlaceRoadCommand
 from engine.game.commands.end_turn import EndTurnCommand
-from engine.game.commands.trade_with_bank import TradeWithBankCommand
-from engine.game.commands.start_trade_with_bank_command import StartTradeWithBankCommand
-from engine.game.commands.exit_trade_with_bank_command import ExitTradeWithBankCommand
-from engine.game.commands.place_settlement import PlaceSettlementCommand
-from engine.game.commands.start_place_settlement_command import (
-    StartPlaceSettlementCommand,
-)
-from engine.game.commands.exit_place_settlement_command import (
-    ExitPlaceSettlementCommand,
-)
-from engine.game.commands.start_place_road_command import StartPlaceRoadCommand
 from engine.game.commands.exit_place_road_command import ExitPlaceRoadCommand
+from engine.game.commands.exit_place_settlement_command import \
+    ExitPlaceSettlementCommand
+from engine.game.commands.exit_trade_with_bank_command import \
+    ExitTradeWithBankCommand
+from engine.game.commands.place_road import PlaceRoadCommand
+from engine.game.commands.place_settlement import PlaceSettlementCommand
+from engine.game.commands.roll_dice import RollDiceCommand
+from engine.game.commands.start_place_road_command import StartPlaceRoadCommand
+from engine.game.commands.start_place_settlement_command import \
+    StartPlaceSettlementCommand
+from engine.game.commands.start_trade_with_bank_command import \
+    StartTradeWithBankCommand
+from engine.game.commands.trade_with_bank import TradeWithBankCommand
 from engine.game.entities.resource_type import ResourceType
 
 

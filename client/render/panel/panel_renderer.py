@@ -1,12 +1,12 @@
 import pygame
 
 from client.assets.theme.colors import PALETTE
+from client.render.panel.buttons import draw_cancel_button
+from client.render.panel.panel_actions import draw_panel_action_buttons
 from client.render.panel.panel_header import draw_panel_header
 from client.render.panel.player_card import draw_player_card
-from client.render.tooltip import draw_tooltip
-from client.render.panel.panel_actions import draw_panel_action_buttons
 from client.render.panel.trade_panel import draw_trade_with_bank_panel
-from client.render.panel.buttons import draw_cancel_button
+from client.render.tooltip import draw_tooltip
 
 
 def draw_panel(screen, state, rect, trade_state):

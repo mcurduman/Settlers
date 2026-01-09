@@ -4,8 +4,9 @@ from client.assets.theme.colors import PALETTE
 from client.assets.theme.fonts import FONTS_PATH
 from client.assets.theme.resource_colors import RESOURCE_COLORS
 from client.render.coord import axial_to_screen
-from .board_geometry import hex_corners
+
 from .board_constants import HEX_SIZE
+from .board_geometry import hex_corners
 
 
 def draw_tile(screen, tile, board_rect, icons):

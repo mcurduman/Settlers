@@ -1,9 +1,9 @@
-from engine.utils.exceptions.settlement_exception import SettlementException
-from engine.utils.exceptions.not_enough_resources_for_trade_exception import (
-    NotEnoughResourcesForTradeException,
-)
-from engine.utils.exceptions.road_exception import RoadException
 from engine.game.states.setup.setup_roll_state import SetupRollState
+from engine.game.strategies.strategy_factory import get_ai_strategy
+from engine.utils.exceptions.not_enough_resources_for_trade_exception import \
+    NotEnoughResourcesForTradeException
+from engine.utils.exceptions.road_exception import RoadException
+from engine.utils.exceptions.settlement_exception import SettlementException
 
 
 class Game:
@@ -19,6 +19,8 @@ class Game:
         self.current_player_roll = 0
 
         self.difficulty = difficulty
+        self.ai_strategy = get_ai_strategy(difficulty) if difficulty else None
+        self.ai_action_description = None
         self.longest_road_holder = None
 
         self.winner = None
@@ -67,6 +69,9 @@ class Game:
                 self.longest_road_holder.name if self.longest_road_holder else None
             ),
             "winner": self.winner if self.winner else None,
+            "ai_action_description": (
+                self.ai_action_description if self.ai_action_description else None
+            ),
         }
 
         state_specific = self._state_specific_extra()
@@ -159,6 +164,10 @@ class Game:
                 )
             player.remove_resource_for_settlement()
 
+        # 4.Ifplayer is ai and in PlayingMainState, remove resources
+        if self.state.get_name() == "PlayingMainState" and player.name.lower() == "ai":
+            player.remove_resource_for_settlement()
+
         node.owner = player.name
         player.add_settlement(node_position)
         player.victory_points += 1
@@ -192,9 +201,17 @@ class Game:
             player.remove_resource_for_road()
             self._update_longest_road_holder()
 
+        if self.state.get_name() == "PlayingMainState" and player.name.lower() == "ai":
+            player.remove_resource_for_road()
+
         edge.owner = player.name
         player.add_road(a, b)
         self._update_longest_road_holder()
+
+        # If in SetupPlaceRoadState, advance setup index and player
+        if self.state.get_name() == "SetupPlaceRoadState":
+            self.setup_index += 1
+            self.next_player()
 
     def handle_trade_with_bank(self, player, give_resource, receive_resource, rate):
         if give_resource == receive_resource:

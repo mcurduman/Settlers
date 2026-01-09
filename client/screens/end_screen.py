@@ -1,4 +1,5 @@
 import pygame
+
 from client.assets.theme.colors import PALETTE
 from client.assets.theme.fonts import FONTS_PATH
 

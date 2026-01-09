@@ -1,7 +1,9 @@
 import pygame
+
 from client.assets.theme.colors import PALETTE
 from client.assets.theme.fonts import FONTS_PATH
-from .panel_constants import STATE_HELPER, PHASE_NAMES
+
+from .panel_constants import PHASE_NAMES, STATE_HELPER
 
 
 def draw_panel_header(screen, state, x, y):

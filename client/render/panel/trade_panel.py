@@ -3,6 +3,7 @@ import pygame
 from client.assets.theme.colors import PALETTE
 from client.assets.theme.fonts import FONTS_PATH
 from client.render.tooltip import draw_tooltip
+
 from .panel_assets import get_resource_icons
 
 

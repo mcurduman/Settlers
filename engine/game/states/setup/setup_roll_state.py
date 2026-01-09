@@ -1,8 +1,9 @@
+from engine.game.commands.roll_dice import RollDiceCommand
 from engine.game.states.game_state import GameState
 from engine.game.states.state_factory import get_state
-from engine.game.commands.roll_dice import RollDiceCommand
+from engine.utils.exceptions.invalid_command_exception import \
+    InvalidCommandException
 from engine.utils.exceptions.setup_exception import SetupException
-from engine.utils.exceptions.invalid_command_exception import InvalidCommandException
 
 
 class SetupRollState(GameState):

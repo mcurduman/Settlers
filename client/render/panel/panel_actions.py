@@ -2,9 +2,9 @@ import pygame
 
 from client.assets.theme.colors import PALETTE
 from client.assets.theme.fonts import FONTS_PATH
-from engine.game.rules.cost import COSTS
 from client.input.helpers import can_trade_3_1, has_resources
 from client.render.render_helpers import has_valid_settlement_spot
+from engine.game.rules.cost import COSTS
 
 
 def get_button_definitions(state, can_build_settlement, can_build_road, can_trade):

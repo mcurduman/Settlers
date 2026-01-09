@@ -1,13 +1,13 @@
 def get_state(state_name: str):
     if state_name == "SetupPlaceSettlementState":
-        from engine.game.states.setup.setup_place_settlement_state import (
-            SetupPlaceSettlementState,
-        )
+        from engine.game.states.setup.setup_place_settlement_state import \
+            SetupPlaceSettlementState
 
         return SetupPlaceSettlementState()
 
     elif state_name == "SetupPlaceRoadState":
-        from engine.game.states.setup.setup_place_road_state import SetupPlaceRoadState
+        from engine.game.states.setup.setup_place_road_state import \
+            SetupPlaceRoadState
 
         return SetupPlaceRoadState()
 
@@ -17,31 +17,30 @@ def get_state(state_name: str):
         return SetupRollState()
 
     elif state_name == "PlayingMainState":
-        from engine.game.states.playing.playing_main_state import PlayingMainState
+        from engine.game.states.playing.playing_main_state import \
+            PlayingMainState
 
         return PlayingMainState()
 
     elif state_name == "PlayingRollState":
-        from engine.game.states.playing.playing_roll_state import PlayingRollState
+        from engine.game.states.playing.playing_roll_state import \
+            PlayingRollState
 
         return PlayingRollState()
     elif state_name == "PlayingPlaceRoadState":
-        from engine.game.states.playing.playing_place_road_state import (
-            PlayingPlaceRoadState,
-        )
+        from engine.game.states.playing.playing_place_road_state import \
+            PlayingPlaceRoadState
 
         return PlayingPlaceRoadState()
     elif state_name == "PlayingPlaceSettlementState":
-        from engine.game.states.playing.playing_place_settlement_state import (
-            PlayingPlaceSettlementState,
-        )
+        from engine.game.states.playing.playing_place_settlement_state import \
+            PlayingPlaceSettlementState
 
         return PlayingPlaceSettlementState()
 
     elif state_name == "PlayingTradeWithBankState":
-        from engine.game.states.playing.playing_trade_with_bank_state import (
-            PlayingTradeWithBankState,
-        )
+        from engine.game.states.playing.playing_trade_with_bank_state import \
+            PlayingTradeWithBankState
 
         return PlayingTradeWithBankState()
     elif state_name == "FinishedState":

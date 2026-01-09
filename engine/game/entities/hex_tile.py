@@ -1,6 +1,8 @@
 import math
 from typing import List, Tuple
+
 from pydantic import BaseModel, Field
+
 from engine.game.entities.resource_type import ResourceType
 
 

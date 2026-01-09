@@ -3,6 +3,7 @@ import pygame
 from client.assets.theme.colors import PALETTE
 from client.render.coord import world_to_screen
 from client.render.render_helpers import is_valid_settlement_node
+
 from .board_constants import NODE_RADIUS
 
 
@@ -23,10 +24,14 @@ def _draw_unowned_node(screen, pos, phase, board, node, current_player):
     """
     Draws a node that is not owned by any player, highlighting valid placements.
     """
-    if phase in (
-        "PlayingMainState",
-        "PlayingTradeWithBankState",
-        "PlayingRollState",
+    if (
+        phase
+        in (
+            "PlayingMainState",
+            "PlayingTradeWithBankState",
+            "PlayingRollState",
+        )
+        or current_player.lower() != "human"
     ):
         return
 

@@ -1,11 +1,12 @@
-from collections import defaultdict
 import random
-from typing import Dict, Tuple, List
+from collections import defaultdict
+from typing import Dict, List, Tuple
 
+from engine.game.entities.edge import Edge
 from engine.game.entities.hex_tile import HexTile
 from engine.game.entities.node import Node
-from engine.game.entities.edge import Edge
-from engine.game.entities.resource_type import ResourceType, build_resources, NUMBERS
+from engine.game.entities.resource_type import (NUMBERS, ResourceType,
+                                                build_resources)
 
 
 def normalize(point: Tuple[float, float], precision: int = 2) -> Tuple[float, float]:

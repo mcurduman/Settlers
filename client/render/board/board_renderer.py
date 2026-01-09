@@ -1,7 +1,7 @@
 from .board_assets import load_tile_icons
-from .tile_renderer import draw_tiles
 from .edge_renderer import draw_edges
 from .node_renderer import draw_nodes
+from .tile_renderer import draw_tiles
 
 
 def draw_board(screen, state, board_rect):
