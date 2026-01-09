@@ -7,8 +7,7 @@ from engine.game.game import Game
 from engine.game.players.ai_player import AIPlayer
 from engine.game.players.human_player import HumanPlayer
 from engine.services.ai_action_describer import describe_ai_action
-from engine.utils.exceptions.game_not_started_exception import \
-    GameNotStartedException
+from engine.utils.exceptions.game_not_started_exception import GameNotStartedException
 
 
 class GameService:
@@ -99,6 +98,10 @@ class GameService:
     def handle_ai_turn(self):
         """
         Handles the AI player's turn.
+        1. Checks if current player is AI.
+        2. Executes AI strategy to determine action.
+        3. Executes the chosen action and describes it.
+        4. If no action is returned, logs a message.
         """
 
         player = self._game.current_player()

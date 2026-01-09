@@ -5,8 +5,7 @@ from typing import Dict, List, Tuple
 from engine.game.entities.edge import Edge
 from engine.game.entities.hex_tile import HexTile
 from engine.game.entities.node import Node
-from engine.game.entities.resource_type import (NUMBERS, ResourceType,
-                                                build_resources)
+from engine.game.entities.resource_type import NUMBERS, ResourceType, build_resources
 
 
 def normalize(point: Tuple[float, float], precision: int = 2) -> Tuple[float, float]:
@@ -18,6 +17,9 @@ def normalize(point: Tuple[float, float], precision: int = 2) -> Tuple[float, fl
 
 class Board:
     def __init__(self, size: float = 1.0):
+        """
+        Initializes the board with tiles, nodes, and edges.
+        """
         self.size = size
 
         self.tiles: List[HexTile] = self._generate_tiles()
@@ -27,6 +29,9 @@ class Board:
         )
 
     def _generate_tiles(self) -> List[HexTile]:
+        """
+        Generates and returns a shuffled list of HexTile objects for the board.
+        """
         resources = build_resources()
         random.shuffle(resources)
 
@@ -60,6 +65,9 @@ class Board:
         return tiles
 
     def _generate_nodes(self) -> Dict[Tuple[float, float], Node]:
+        """
+        Generates and returns a dictionary of Node objects for each unique corner position.
+        """
         nodes: Dict[Tuple[float, float], Node] = {}
 
         for tile in self.tiles:
@@ -74,6 +82,9 @@ class Board:
     def _generate_edges(
         self,
     ) -> Dict[Tuple[Tuple[float, float], Tuple[float, float]], Edge]:
+        """
+        Generates and returns a dictionary of Edge objects for each unique edge between nodes.
+        """
         edges: Dict[Tuple[Tuple[float, float], Tuple[float, float]], Edge] = {}
 
         for tile in self.tiles:
@@ -91,15 +102,27 @@ class Board:
         return edges
 
     def get_tiles(self) -> List[HexTile]:
+        """
+        Returns the list of tiles on the board.
+        """
         return self.tiles
 
     def get_nodes(self) -> List[Node]:
+        """
+        Returns the list of nodes on the board.
+        """
         return list(self.nodes.values())
 
     def get_edges(self) -> List[Edge]:
+        """
+        Returns the list of edges on the board.
+        """
         return list(self.edges.values())
 
     def longest_road(self, player) -> int:
+        """
+        Calculates the length of the longest road for a given player.
+        """
         if not player.roads:
             return 0
 
@@ -136,7 +159,7 @@ class Board:
         self, dice_value: int, player_name: str
     ) -> List[ResourceType]:
         """
-        Return resources produced for the given player only (for their settlements).
+        Returns resources produced for the given player only (for their settlements).
         """
         produced_resources: List[ResourceType] = []
 
@@ -152,6 +175,9 @@ class Board:
         return produced_resources
 
     def edge_connected_to_network(self, edge, player):
+        """
+        Checks if the given edge is connected to the player's network (settlement or adjacent road).
+        """
         a, b = edge.a, edge.b if hasattr(edge, "a") else (edge["a"], edge["b"])
 
         # 1. settlement la capăt
@@ -167,6 +193,9 @@ class Board:
         return False
 
     def edge_connected_to_settlement(self, edge, player):
+        """
+        Checks if the given edge is connected to any of the player's settlements.
+        """
         a, b = edge.a, edge.b if hasattr(edge, "a") else (edge["a"], edge["b"])
 
         for pos in player.settlements:
@@ -176,6 +205,9 @@ class Board:
         return False
 
     def node_has_adjacent_settlement(self, node_pos):
+        """
+        Checks if the given node position has an adjacent settlement.
+        """
         for edge in self.edges.values():
             a, b = edge.a, edge.b
             if node_pos == a:
@@ -191,12 +223,18 @@ class Board:
         return False
 
     def node_connected_to_player_road(self, node_pos, player):
+        """
+        Checks if the given node position is connected to any of the player's roads.
+        """
         for a, b in player.roads:
             if node_pos == a or node_pos == b:
                 return True
         return False
 
     def valid_settlement_node(self, node_pos, player):
+        """
+        Checks if a node position is valid for placing a settlement for the player.
+        """
         node = self.nodes.get(node_pos)
         if node is None or node.owner is not None:
             return False
@@ -212,6 +250,9 @@ class Board:
         return True
 
     def debug_summary(self) -> dict:
+        """
+        Returns a summary of the board for debugging purposes.
+        """
         return {
             "tiles": len(self.tiles),
             "nodes": len(self.nodes),

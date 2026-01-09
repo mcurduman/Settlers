@@ -38,25 +38,25 @@ This application is a mini Catan-style game with a graphical interface built usi
 - Why: The game operates in different phases, and the rules are not the same in each phase. A clear way is needed to control what is allowed at any given time.
 - Where:
   - `engine/game/states/`
-- What it solves: Each state manages its own rules. Transitioning between phases is clear, and changes can be made without affecting the rest of the game.
+- What it solves: Each state manages its own rules so users cannot call certain commands if the state doesnt permit it. Transitioning between phases is clear, and changes can be made without affecting the rest of the game.
 
 ### 3. Factory Pattern
 - Why: Commands and states are created in multiple places. To avoid duplicate code, their creation is centralized.
 - Where:
   - `engine/game/commands/command_factory.py`
   - `engine/game/states/state_factory.py`
-- What it solves: Object creation is controlled from a single place. Adding new commands or states is quick and does not require major changes.
+- What it solves: Object creation is controlled from a single place. Adding new commands or states is quick and does not require major changes, also the introduction of the factories fixed issues regarding circular imports.
 
 ### 4. Strategy Pattern
 - Why: The AI uses different strategies (easy, hard, adaptive) that can be swapped at runtime depending on the game situation or difficulty setting. This allows flexible and extensible AI behavior.
 - Where:
   - `engine/game/strategies/`
   - `engine/game/players/ai_player.py`
-- What it solves: Encapsulates different AI algorithms and makes it easy to add or change strategies without modifying the main game or player logic. The AI can dynamically select the best strategy during the game.
+- What it solves: Encapsulates different AI algorithms and makes it easy to add or change strategies without modifying the main game or player logic. For this mini-game I have chosen that when the user has less victory points the AI strategy will change to the easier one.
 
 ## Testing
 
-To run all tests and check code coverage, use:
+To run all tests and check code coverage, use (49%):
 
 ```
 pytest --cov=engine --cov=client --cov-report=term-missing
