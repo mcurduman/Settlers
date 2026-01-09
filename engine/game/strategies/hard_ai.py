@@ -1,10 +1,13 @@
 import math
 
-from engine.game.strategies.ai_helper import (can_try_road, can_try_settlement,
-                                              edges_touching_network,
-                                              get_player_resources,
-                                              is_valid_settlement_node,
-                                              is_valid_setup_settlement_node)
+from engine.game.strategies.ai_helper import (
+    can_try_road,
+    can_try_settlement,
+    edges_touching_network,
+    get_player_resources,
+    is_valid_settlement_node,
+    is_valid_setup_settlement_node,
+)
 from engine.game.strategies.strategy_ai import StrategyAI
 
 DICE_SCORE = {
@@ -99,6 +102,44 @@ class HardAIStrategy(StrategyAI):
 
         if not target:
             print("[AI] No expansion target available")
+
+            # 1. există un settlement valid în rețea --> devine TARGET
+            local_target = self.find_best_immediate_settlement(board, player)
+            if local_target:
+                print(f"[AI] Using local settlement as target {local_target}")
+                self.current_target = local_target
+                self.build_phase = "settlement"
+
+                # dacă pot construi acum → construiesc
+                if can_try_settlement(resources):
+                    return {
+                        "command": "place_settlement",
+                        "kwargs": {"position": local_target},
+                    }
+
+                # altfel fac trade pentru settlement
+                trade = self.smart_trade(resources, intent="settlement")
+                if trade:
+                    return {"command": "trade_with_bank", "kwargs": trade}
+
+                return {"command": "end_turn", "kwargs": {}}
+
+            # 2. nu există niciun settlement posibil --> extind rețeaua
+            if can_try_road(resources):
+                edges = edges_touching_network(game_state, player)
+                if edges:
+                    edge = edges[0]
+                    print(f"[AI] Fallback road without target {edge}")
+                    return {
+                        "command": "place_road",
+                        "kwargs": {"a": edge[0], "b": edge[1]},
+                    }
+
+            # 3. trade pentru drum
+            trade = self.smart_trade(resources, intent="road")
+            if trade:
+                return {"command": "trade_with_bank", "kwargs": trade}
+
             return {"command": "end_turn", "kwargs": {}}
 
         # Decide build phase based on available opportunities
