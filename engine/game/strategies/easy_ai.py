@@ -1,14 +1,11 @@
 import random
 
-from engine.game.strategies.ai_helper import (
-    edges_touching_network,
-    free_edges,
-    is_desert_plus_resource,
-    can_try_road,
-    can_try_settlement,
-    can_try_trade,
-    get_player_resources,
-)
+from engine.game.strategies.ai_helper import (can_try_road, can_try_settlement,
+                                              can_try_trade,
+                                              edges_touching_network,
+                                              free_edges, get_player_resources,
+                                              is_desert_plus_resource,
+                                              is_valid_setup_settlement_node)
 from engine.game.strategies.strategy_ai import StrategyAI
 
 
@@ -102,6 +99,9 @@ class EasyAIStrategy(StrategyAI):
                 continue
 
             pos = tuple(node["position"])
+
+            if not is_valid_setup_settlement_node(game_state, pos):
+                continue
 
             if is_desert_plus_resource(game_state, pos):
                 candidates.append(pos)

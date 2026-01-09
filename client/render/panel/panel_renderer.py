@@ -24,7 +24,7 @@ def draw_panel(screen, state, rect, trade_state):
     y = rect.y + 16
     width = rect.width - 32
 
-    # ---- HEADER ----
+    # ---- PANEL HEADER ----
     y = draw_panel_header(screen, state, x, y)
 
     hovered_tooltip = None

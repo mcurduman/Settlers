@@ -98,6 +98,10 @@ class GameService:
     def handle_ai_turn(self):
         """
         Handles the AI player's turn.
+        1. Checks if current player is AI.
+        2. Executes AI strategy to determine action.
+        3. Executes the chosen action and describes it.
+        4. If no action is returned, logs a message.
         """
 
         player = self._game.current_player()

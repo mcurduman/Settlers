@@ -3,3 +3,7 @@ uvicorn
 pydantic
 python-multipart
 pygame
+
+#pentru testare
+pytest
+pytest-cov

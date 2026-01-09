@@ -49,6 +49,11 @@ def is_valid_settlement_node(board, node, player_id):
     return False
 
 
+def is_valid_setup_settlement_node(board, node_pos):
+    """Check if a node is a valid settlement spot by distance rule."""
+    return _is_distance_rule_satisfied(board, node_pos)
+
+
 def edge_connected_to_network(edge, board, player_id):
     """Check if the edge is connected to the player's existing road network or settlements."""
     if edge_connected_to_settlement(edge, board, player_id):

@@ -94,6 +94,15 @@ def edge_connected_to_network(edge, board, player_id):
     return False
 
 
+def _dist(a, b):
+    """Calculate Euclidean distance between two positions."""
+    return ((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) ** 0.5
+
+
+def is_valid_setup_settlement_node(board, node_pos):
+    return _distance_rule_ok(board, node_pos)
+
+
 def is_valid_settlement_node(board, node, player_id):
     """
     Returns True if the node is a valid settlement spot for the player:

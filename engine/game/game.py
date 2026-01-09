@@ -82,10 +82,16 @@ class Game:
 
     # Player management
     def next_player(self):
+        """
+        Advances to the next player in turn order.
+        """
         self.current_player_index = (self.current_player_index + 1) % len(self.players)
         return self.players[self.current_player_index]
 
     def check_if_won(self):
+        """
+        Checks if any player has reached the victory condition.
+        """
         for player in self.players:
             if player.victory_points >= 5:
                 self.winner = player.name
@@ -93,15 +99,24 @@ class Game:
         return None
 
     def current_player(self):
+        """
+        Returns the current player object.
+        """
         return self.players[self.current_player_index]
 
     def _update_longest_road_holder(self):
+        """
+        Updates the player who holds the 'Longest Road' bonus.
+        - If no player has a road of at least MIN_LENGTH, remove the bonus.
+        - If multiple players tie for longest road, current holder retains it.
+        """
         MIN_LENGTH = 4
 
         road_lengths = {
             player: self.board.longest_road(player) for player in self.players
         }
 
+        # Only players with a road of at least MIN_LENGTH are eligible
         eligible = {
             p: length for p, length in road_lengths.items() if length >= MIN_LENGTH
         }
@@ -114,6 +129,7 @@ class Game:
         max_length = max(eligible.values())
         contenders = [p for p, length in eligible.items() if length == max_length]
 
+        # If current holder is still among contenders, do nothing
         if self.longest_road_holder in contenders:
             return
 
@@ -123,17 +139,28 @@ class Game:
                 return
             self.longest_road_holder.victory_points -= 1
 
+        # Assign new holder
         new_holder = contenders[0]
         new_holder.victory_points += 1
         self.longest_road_holder = new_holder
 
     def execute_command(self, command, player):
+        # Delegates command execution to the current state
         return self.state.execute(command, self, player)
 
     def handle_end_turn(self):
+        """
+        Ends the current player's turn and advances to the next player.
+        """
         self.next_player()
 
     def handle_dice_roll(self, dice_value: int):
+        """
+        Handles a dice roll for the current player.
+
+        1. If in SetupRollState, record the roll for the current player.
+        2. Otherwise, distribute resources based on the roll.
+        """
         if self.state.get_name() == "SetupRollState":
             self.players[self.current_player_index].roll_dice(dice_value)
             return dice_value
@@ -146,6 +173,13 @@ class Game:
                 player.add_resource(resource)
 
     def handle_place_settlement(self, player, node_position):
+        """
+        Handles placing a settlement for the given player at the specified node position.
+        1. Node must exist.
+        2. Node must be free.
+        3. If in PlayingPlaceSettlementState, must be adjacent to player's road.
+        4. If player is ai and in PlayingMainState, remove resources.
+        """
         board = self.board
 
         # 1. Node must exist
@@ -176,6 +210,12 @@ class Game:
         self._update_longest_road_holder()
 
     def handle_place_road(self, player, a, b):
+        """
+        Handles placing a road for the given player between nodes a and b.
+        1. Edge must exist.
+        2. Edge must be free.
+        3. If in SetupPlaceRoadState, must connect to a settlement.
+        """
         board = self.board
         key = tuple(sorted((a, b)))
 
@@ -216,6 +256,12 @@ class Game:
             self.next_player()
 
     def handle_trade_with_bank(self, player, give_resource, receive_resource, rate):
+        """
+        Deals with trading resources with the bank at a specified rate.
+        1. Player must have enough of the resource they are giving.
+        2. Cannot trade the same resource type.
+        3. Adjust player's resources accordingly.
+        """
         if give_resource == receive_resource:
             raise ValueError("Cannot trade the same resource type")
 
@@ -228,9 +274,13 @@ class Game:
         player.add_resource(receive_resource, 1)
 
     def handle_get_state(self, **kwargs):
+        """
+        Returns the current game state.
+        """
         return self.get_state()
 
     def handle_ai_strategy(self, player):
+        """Executes AI strategy for the given AI player and returns the chosen action."""
         if not player.is_ai():
             return
         self.ai_strategy.update_strategy(ai_player=player, human_player=self.players[0])

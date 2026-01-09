@@ -11,13 +11,13 @@ class AdaptiveAIStrategy:
     def __init__(self):
         self.easy = EasyAIStrategy()
         self.hard = HardAIStrategy()
-        self.current = self.easy  # default
+        self.current = self.hard  # default
 
     def update_strategy(self, ai_player, human_player):
         """
         Decide which strategy to use.
         """
-        if ai_player.victory_points < human_player.victory_points:
+        if ai_player.victory_points <= human_player.victory_points:
             self.current = self.hard
         else:
             self.current = self.easy
