@@ -37,5 +37,5 @@ def test_draw_panel_main():
             "current_player": "human",
         }
         trade_state = {}
-        panel_ui, trade_ui = panel_renderer.draw_panel(screen, state, rect, trade_state)
+        panel_ui, _ = panel_renderer.draw_panel(screen, state, rect, trade_state)
         assert isinstance(panel_ui, dict)

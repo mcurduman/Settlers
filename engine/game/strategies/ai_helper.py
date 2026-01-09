@@ -98,6 +98,38 @@ def is_valid_settlement_node(board, node, player_id):
     return False
 
 
+def is_valid_target_node(game_state, node_pos, player):
+    """
+    Returns True if node_pos is a valid expansion target:
+    - node is empty
+    - distance rule satisfied
+    - node is not already part of player's network
+    """
+    board = game_state["board"]
+
+    # node must be empty
+    for n in board["nodes"]:
+        if tuple(n["position"]) == node_pos:
+            if n["owner"] is not None:
+                return False
+            break
+
+    # distance rule (same as setup)
+    if not is_valid_setup_settlement_node(game_state, node_pos):
+        return False
+
+    # must not already be in network
+    network = set(player.settlements)
+    for a, b in player.roads:
+        network.add(a)
+        network.add(b)
+
+    if node_pos in network:
+        return False
+
+    return True
+
+
 def _distance_rule_ok(board, pos):
     """
     Returns True if there are no settlements adjacent to pos (distance rule satisfied).
