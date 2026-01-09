@@ -1,27 +1,24 @@
-from engine.game.commands.roll_dice import RollDiceCommand
-from engine.game.commands.place_road import PlaceRoadCommand
 from engine.game.commands.end_turn import EndTurnCommand
-from engine.game.commands.trade_with_bank import TradeWithBankCommand
-from engine.game.commands.start_trade_with_bank_command import StartTradeWithBankCommand
-from engine.game.commands.exit_trade_with_bank_command import ExitTradeWithBankCommand
-from engine.game.commands.place_settlement import PlaceSettlementCommand
-from engine.game.commands.start_place_settlement_command import (
-    StartPlaceSettlementCommand,
-)
-from engine.game.commands.exit_place_settlement_command import (
-    ExitPlaceSettlementCommand,
-)
-from engine.game.commands.start_place_road_command import StartPlaceRoadCommand
 from engine.game.commands.exit_place_road_command import ExitPlaceRoadCommand
+from engine.game.commands.exit_place_settlement_command import \
+    ExitPlaceSettlementCommand
+from engine.game.commands.exit_trade_with_bank_command import \
+    ExitTradeWithBankCommand
+from engine.game.commands.place_road import PlaceRoadCommand
+from engine.game.commands.place_settlement import PlaceSettlementCommand
+from engine.game.commands.roll_dice import RollDiceCommand
+from engine.game.commands.start_place_road_command import StartPlaceRoadCommand
+from engine.game.commands.start_place_settlement_command import \
+    StartPlaceSettlementCommand
+from engine.game.commands.start_trade_with_bank_command import \
+    StartTradeWithBankCommand
+from engine.game.commands.trade_with_bank import TradeWithBankCommand
 from engine.game.entities.resource_type import ResourceType
 
 
 class CommandFactory:
     @staticmethod
     def create(command_name, **kwargs):
-        from engine.game.commands.start_game import StartGameCommand
-        from engine.game.commands.end_game import EndGameCommand
-        from engine.game.commands.get_state import GetStateCommand
 
         mapping = {
             "roll_dice": lambda: RollDiceCommand(),
@@ -39,9 +36,6 @@ class CommandFactory:
             "exit_place_settlement": lambda: ExitPlaceSettlementCommand(),
             "start_place_road": lambda: StartPlaceRoadCommand(),
             "exit_place_road": lambda: ExitPlaceRoadCommand(),
-            "start_game": lambda: StartGameCommand(game=kwargs["game"], **kwargs),
-            "end_game": lambda: EndGameCommand(game=kwargs["game"], **kwargs),
-            "get_state": lambda: GetStateCommand(game=kwargs["game"], **kwargs),
         }
         if command_name not in mapping:
             raise ValueError(f"Unknown command: {command_name}")

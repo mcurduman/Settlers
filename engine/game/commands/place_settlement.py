@@ -1,4 +1,5 @@
 from typing import Tuple
+
 from engine.game.commands.command import Command
 
 

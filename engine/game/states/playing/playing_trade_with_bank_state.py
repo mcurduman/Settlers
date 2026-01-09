@@ -1,8 +1,10 @@
-from engine.game.states.game_state import GameState
+from engine.game.commands.exit_trade_with_bank_command import \
+    ExitTradeWithBankCommand
 from engine.game.commands.trade_with_bank import TradeWithBankCommand
-from engine.game.commands.exit_trade_with_bank_command import ExitTradeWithBankCommand
-from engine.utils.exceptions.invalid_command_exception import InvalidCommandException
+from engine.game.states.game_state import GameState
 from engine.game.states.state_factory import get_state
+from engine.utils.exceptions.invalid_command_exception import \
+    InvalidCommandException
 
 
 class PlayingTradeWithBankState(GameState):

@@ -1,8 +1,8 @@
 import pygame
 
-from client.screens.start_screen import StartScreen
 from client.screens.end_screen import EndScreen
 from client.screens.game_screen import GameScreen
+from client.screens.start_screen import StartScreen
 
 WIDTH, HEIGHT = 1000, 700
 BG_COLOR = (15, 23, 42)
@@ -19,12 +19,12 @@ def main():
     while running:
 
         start_screen = StartScreen(screen)
-        difficulty = start_screen.run()
+        action = start_screen.run()
 
-        if difficulty in (None, "exit", "window_close"):
+        if action in (None, "exit", "window_close"):
             break
 
-        game_screen = GameScreen(screen, difficulty)
+        game_screen = GameScreen(screen)
         exit_info = game_screen.run()
 
         if exit_info["exit_type"] == "window_close":

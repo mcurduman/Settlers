@@ -1,9 +1,12 @@
 import pygame
-from engine.services.game_service import GameService
-from client.render.board_renderer import draw_board
-from client.render.panel_renderer import draw_panel
-from client.input.interaction import handle_interaction
+
 from client.assets.theme.fonts import FONTS_PATH
+from client.input.interaction import handle_interaction
+from client.render.ai_overlay import draw_ai_action
+from client.render.board.board_renderer import draw_board
+from client.render.panel.panel_renderer import draw_panel
+from client.render.tooltip import draw_tooltip
+from engine.services.game_service import GameService
 
 WIDTH, HEIGHT = 1000, 700
 BOARD_WIDTH = int(WIDTH * 2 / 3)
@@ -11,11 +14,11 @@ PANEL_WIDTH = WIDTH - BOARD_WIDTH
 
 
 class GameScreen:
-    def __init__(self, screen, difficulty):
+    def __init__(self, screen):
         self.screen = screen
 
         self.game = GameService()
-        self.game.start_game(difficulty)
+        self.game.start_game()
         self.state = self.game.get_state()
         self.last_state = (
             self.state.copy() if hasattr(self.state, "copy") else dict(self.state)
@@ -30,6 +33,9 @@ class GameScreen:
         self.clock = pygame.time.Clock()
         self.running = True
 
+        self.last_ai_tick = 0
+        self.AI_DELAY = 3000  # ms
+
         self.ui = {
             "panel": {},
             "trade": {
@@ -42,6 +48,9 @@ class GameScreen:
         self.exit_btn_rect = pygame.Rect(0, 0, 0, 0)
 
     def handle_events(self):
+        """
+        Handles all pygame events, including user input and exit logic.
+        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
@@ -64,6 +73,9 @@ class GameScreen:
                     return True
 
     def update(self):
+        """
+        Updates the game state from the GameService. Handles game end detection.
+        """
         try:
             new_state = self.game.get_state()
             self.last_state = (
@@ -78,6 +90,9 @@ class GameScreen:
                 return "game_ended"
 
     def draw(self):
+        """
+        Draws the entire game screen, including board, panel, and tooltips.
+        """
         self.screen.blit(self.bg, (0, 0))
 
         board_bg = pygame.Surface(self.board_rect.size, pygame.SRCALPHA)
@@ -90,9 +105,22 @@ class GameScreen:
         panel_bg.fill((0, 18, 25))
         self.screen.blit(panel_bg, self.panel_rect.topleft)
 
-        self.ui["panel"], self.ui["trade_ui"] = draw_panel(
+        # Draw panel and get hovered tooltip
+        panel_result = draw_panel(
             self.screen, self.state, self.panel_rect, self.ui["trade"]
         )
+        if isinstance(panel_result, tuple):
+            self.ui["panel"], self.ui["trade_ui"] = panel_result
+            hovered_tooltip = None
+        else:
+            self.ui["panel"] = panel_result
+            hovered_tooltip = None
+
+        # Try to get hovered_tooltip from draw_panel if returned
+        try:
+            _, _, hovered_tooltip = panel_result
+        except Exception:
+            pass
 
         self.exit_btn_rect = pygame.Rect(
             self.panel_rect.x + self.panel_rect.width // 2 - 60,
@@ -122,9 +150,19 @@ class GameScreen:
             txt.get_rect(center=self.exit_btn_rect.center),
         )
 
+        # Draw tooltip if available
+        if "hovered_tooltip" in locals() and hovered_tooltip:
+            draw_tooltip(self.screen, hovered_tooltip[0], hovered_tooltip[1])
+
+        if self.game.ai_action_description:
+            draw_ai_action(self.screen, self.game.ai_action_description)
+
         pygame.display.flip()
 
     def run(self):
+        """
+        Main game loop. Handles events, updates, and drawing until exit.
+        """
         while self.running:
             self.clock.tick(60)
 
@@ -132,6 +170,18 @@ class GameScreen:
                 return {"exit_type": "exit_btn", "state": self.last_state}
             if self.update():
                 return {"exit_type": "game_ended", "state": self.last_state}
+
+            now = pygame.time.get_ticks()
+            if str(self.state.get("current_player")).upper() == "AI":
+                if now - self.last_ai_tick > self.AI_DELAY:
+                    self.game.handle_ai_turn()
+                    self.last_ai_tick = now
+                    self.game.ai_action_description = self.game.get_state().get(
+                        "ai_action_description"
+                    )
+            else:
+                self.game.ai_action_description = None
+
             self.draw()
 
         return {"exit_type": "window_close", "state": self.last_state}
